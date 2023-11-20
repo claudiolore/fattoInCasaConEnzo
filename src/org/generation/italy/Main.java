@@ -1,6 +1,8 @@
 package org.generation.italy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
 
@@ -21,8 +23,12 @@ public class Main {
 		Alla fine dell'inserimento, mostrare il numero di calorie total */
 		
 		HashMap<String, Integer> ingredienti=new HashMap<>(); 
-		 
-		
+		Scanner sc=new Scanner(System.in); 
+		String nomeRicetta, ingredienteScelto, risposta;
+		ArrayList<String> ricetta=new ArrayList<>();
+		HashMap<String, Integer> ricette=new HashMap<>();
+		int calorieRicetta=0;
+		int quantita;
 			ingredienti.put("Burro", 758);
 	        ingredienti.put("Lardo", 891);
 	        ingredienti.put("Maionese", 655);
@@ -116,12 +122,49 @@ public class Main {
 	        ingredienti.put("Vino Rosso", 75);
 	        ingredienti.put("Whisky", 245);
 
+
+	        
+	do {	        
+			
+		System.out.println("Prodotti disponibili:");        
+		for(String n:ingredienti.keySet()) 
+		{
+			System.out.println(n);
+		}
+			
+		System.out.println("Inserisci il nome per una nuova RICETTA");
+		nomeRicetta=sc.nextLine();
+		ricette.put(nomeRicetta, 0 );
+	      
+		do {		
+			System.out.println("Inserisci prodotto: ");
+			ingredienteScelto=sc.nextLine();
+			if (ingredienti.containsKey(ingredienteScelto))
+			{
+				System.out.println("ingrediente trovato e aggiunto.");
+				System.out.println("aggiungere quantita");
+				quantita=Integer.parseInt(sc.nextLine());
+				calorieRicetta=calorieRicetta+(ingredienti.get(ingredienteScelto)*quantita);
+				System.out.println("calorie ricetta momentanee: "+calorieRicetta);
+			}
+			else
+			{
+				System.out.println("ingrediente non disponibile!");        
+				break;
+			}
+			
+			System.out.println("Vuoi aggiungere un INGREDIENTE?");
+			risposta=sc.nextLine();
+		}while(risposta.equals("si"));
+		
+	System.out.println("Complimenti hai creato la ricetta: "+nomeRicetta+" con "+calorieRicetta+" calorie Totali.");
+		
+	System.out.println("Vuoi inserire una nuova RICETTA(si/no)?");
+	risposta=sc.nextLine();	
+	}while(risposta.equals("si"));	
+		
+	System.out.println("ARRIVEDERCI");
+	sc.close();        
+		}
 	
-
-	        
-	        
-	        
-	        
 	}
-
-}
